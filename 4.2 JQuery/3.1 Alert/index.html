@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span id="title"><h1>Modal</h1></span>
+        </header>
+    </div>
+    <div class="alert" id="alert-danger" hidden>
+        <div class="alert-container">
+            <div class="alert-header">
+                <div class="alert-title"><h2>alert Title</h2></div>
+                <button class="alert-close-btn" onclick="closeModal()">x</button>
+            </div>
+            <hr>
+            <div class="alert-body">
+                <p>This is just general information</p>
+            </div>
+        </div>
+    </div>
+    <main>
+        <button id="btn-open">Click here to open alert</button>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+    class Toggle extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                toggle: true,
+                header: {
+                    title: 'Welcome',
+                    description: 'Students',
+                    image: {
+                        src: 'https://images.unsplash.com/photo-1602784297725-ce1563d26e7e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80',
+                        title: 'test',
+                    }
+                }
+            };
+
+            this.handleClick = this.handleClick.bind(this);
+        }
+
+        handleClick() {
+            this.setState(state => ({
+                toggle: !state.toggle
+            }))
+        }
+
+        render() {
+            const isToggle = this.state.toggle;
+            let text;
+            if (isToggle) {
+                text = <Text message="Change title"/>;
+            } else {
+                text = <Text message="Toggled title"/>;
+            }
+            return (
+                <div>
+                    <NavBar/>
+                    <Header title={this.state.header.title} imgSrc={this.state.header.image.src}/>
+                    <Body title={text}/>
+                    <div className="pt-5">
+                        <Footer/>
+                    </div>
+                </div>
+            );
+        }
+    }
+
+    function NavBar(props) {
+        return (
+            <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+                <a className="navbar-brand" href="#">
+                    <Logo/>
+                </a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav mr-auto">
+                        <li className="nav-item active">
+                            <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Link</a>
+                        </li>
+                        <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a className="dropdown-item" href="#">Action</a>
+                                <a className="dropdown-item" href="#">Another action</a>
+                                <div className="dropdown-divider"></div>
+                                <a className="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <form className="form-inline my-2 my-lg-0">
+                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+            </nav>
+        );
+    }
+
+    function Body (props) {
+        return (
+            <div className="container mt-5">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg">
+                            <Card title={props.title} src="img/jung-ho-park-HLDgqTEBv4s-unsplash.jpg"/>
+                        </div>
+                        <div className="col-lg">
+                            <Card title={props.title} src="img/evgeni-tcherkasski-UNyWxITX_Jg-unsplash.jpg" />
+                        </div>
+                        <div className=" col-lg">
+                            <Card title={props.title} src="img/birger-strahl-Suaoofu6DXM-unsplash.jpg" />
+                        </div>
+                    </div>
+                    <div className="p-3 m-5">
+                        <Headings title="Gallery"/>
+                        <hr className="p-3 m-5 "/>
+                        <Slider/>
+                    </div>
+                    <div className="p-3 m-5">
+                        <Headings title="Reach us"/>
+                        <hr className="p-3 m-5 "/>
+                        <Form/>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    function Text (props) {
+        return (
+            <div>
+                <div>
+                    <p>{props.message}</p>
+                </div>
+            </div>
+        );
+    }
+
+    function Header(props) {
+        const style = {
+            height: "720px",
+            objectFit: "cover",
+        };
+        const overlay = {
+            backgroundColor: "#000",
+            height: "720px",
+            opacity:"0.3",
+            top: "65px"
+        }
+
+        const title = {
+            zIndex : "1",
+        }
+        return (
+            <header>
+                <div className="d-flex justify-content-center align-items-center d-block">
+                    <img style={style} alt="Responsive image" src={props.imgSrc} className="img-fluid w-100"/>
+                    <h1 style={title} className="position-absolute text-white font-weight-bold display-1">Hello World</h1>
+                    <div className="overlay card-img-overlay" style={overlay}>
+                    </div>
+                </div>
+            </header>
+        );
+    }
+
+    function Card(props) {
+        const style = {
+            height: "200px",
+            objectFit: "cover"
+        }
+
+        return (
+            <div className="card shadow-lg p-3 mb-5 bg-white rounded">
+                <img style={style} src={props.src} className="card-img-top"/>
+                    <div className="card-body">
+                        <h5 className="card-title">
+                            {props.title}
+                        </h5>
+                        <p className="card-text">Some quick example text to build on the card title and make up the bulk
+                            of the card's content.</p>
+                        <a href="#" className="btn btn-primary">Go somewhere</a>
+                    </div>
+            </div>
+        );
+    }
+
+    function Headings(props) {
+        return (
+            <h2 className="h2 m-5 text-center">{props.title}</h2>
+        );
+    }
+
+    function Slider(props) {
+        const img = "img/jung-ho-park-HLDgqTEBv4s-unsplash.jpg"
+        const img2 = "img/taneli-lahtinen-mHK4yW2exrI-unsplash.jpg"
+        const img3 = "img/ingmar-YRzP7huUGtE-unsplash.jpg"
+        const style = {
+            height: "500px",
+            objectFit: "cover"
+        }
+
+        return (
+            <div id="carouselExampleCaptions" className="carousel slide" data-ride="carousel">
+                <ol className="carousel-indicators">
+                    <li data-target="#carouselExampleCaptions" data-slide-to="0" className="active"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                </ol>
+                <div style={style} className="carousel-inner shadow-lg mb-5 bg-white rounded">
+                    <div className="carousel-item active">
+                        <img src={img} className="d-block w-100" alt="..."/>
+                            <div className="carousel-caption d-none d-md-block">
+                                <h5>First slide label</h5>
+                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                            </div>
+                    </div>
+                    <div className="carousel-item">
+                        <img src={img2} className="d-block w-100" alt="..."/>
+                            <div className="carousel-caption d-none d-md-block">
+                                <h5>Second slide label</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                    </div>
+                    <div className="carousel-item">
+                        <img src={img3} className="d-block w-100" alt="..."/>
+                            <div className="carousel-caption d-none d-md-block">
+                                <h5>Third slide label</h5>
+                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                            </div>
+                    </div>
+                </div>
+                <a className="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="sr-only">Previous</span>
+                </a>
+                <a className="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="sr-only">Next</span>
+                </a>
+            </div>
+        );
+    }
+
+    function Form(props) {
+        return (
+            <form className="needs-validation" noValidate>
+                <div className="form-row">
+                    <div className="col-md-6 mb-3">
+                        <label htmlFor="validationTooltip01">First name</label>
+                        <input type="text" className="form-control" id="validationTooltip01" value="Mark" required/>
+                            <div className="valid-tooltip">
+                                Looks good!
+                            </div>
+                    </div>
+                    <div className="col-md-6 mb-3">
+                        <label htmlFor="validationTooltip02">Last name</label>
+                        <input type="text" className="form-control" id="validationTooltip02" value="Otto" required/>
+                            <div className="valid-tooltip">
+                                Looks good!
+                            </div>
+                    </div>
+                </div>
+                <div className="form-row">
+                    <div className="col-md-6 mb-3">
+                        <label htmlFor="validationTooltip03">City</label>
+                        <input type="text" className="form-control" id="validationTooltip03" required/>
+                            <div className="invalid-tooltip">
+                                Please provide a valid city.
+                            </div>
+                    </div>
+                    <div className="col-md-3 mb-3">
+                        <label htmlFor="validationTooltip04">State</label>
+                        <select className="custom-select" id="validationTooltip04" required>
+                            <option selected disabled value="">Choose...</option>
+                            <option>...</option>
+                        </select>
+                        <div className="invalid-tooltip">
+                            Please select a valid state.
+                        </div>
+                    </div>
+                    <div className="col-md-3 mb-3">
+                        <label htmlFor="validationTooltip05">Zip</label>
+                        <input type="text" className="form-control" id="validationTooltip05" required/>
+                            <div className="invalid-tooltip">
+                                Please provide a valid zip.
+                            </div>
+                    </div>
+                </div>
+                <button className="btn btn-primary" type="submit">Submit form</button>
+            </form>
+        );
+    }
+
+    function Footer(props) {
+        return (
+            <div className="d-flex justify-content-between bd-highlight bg-dark text-white">
+                <div className="m-3 bd-highlight">
+                    <Logo/>
+                </div>
+                <div className="m-3 bd-highlight">
+                    <ul className="nav">
+                        <li className="nav-item">
+                            <a className="nav-link active" href="#">Active</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Link</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Link</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Link</a>
+                        </li>
+                    </ul>
+                </div>
+                <div className="m-3 bd-highlight">
+                    <nav className="navbar navbar-light">
+                        <form className="form-inline">
+                            <input className="form-control" type="search" placeholder="Search"
+                                   aria-label="Search"/>
+                                <button className="btn btn-outline-success mx-3" type="submit">Search</button>
+                        </form>
+                    </nav>
+                </div>
+            </div>
+        );
+    }
+
+    function Logo(props) {
+        return (
+            <img src="https://courses.brandtechgroup.com/argon/img/brand/white.png" alt=""/>
+        );
+    }
+
+    ReactDOM.render(
+        <Toggle />,
+        document.getElementById('root')
+    );
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="title">Modal</h1>
+        </header>
+    </div>
+    <main>
+        <button id="open-btn">Click here to open Modal</button>
+    </main>
+    <div class="modal" id="modal-1" hidden>
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title"><h2>Modal Title</h2></div>
+                <button class="modal-close-btn" onclick="closeModal()">x</button>
+            </div>
+            <hr>
+            <div class="modal-body">
+                <p>This is just general information</p>
+            </div>
+            <button id="close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

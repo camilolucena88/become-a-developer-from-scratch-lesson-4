@@ -1,0 +1,89 @@
+.container {
+    height: 500px;
+    background-color: #111;
+    width: 100%;
+    overflow: hidden;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    color: #FFF;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+p {
+    color: black;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+.alert {
+    margin: 30px;
+    /* This timing applies on the way OUT */
+    transition-timing-function: ease-in;
+    /* Quick on the way out */
+    -webkit-transition: all 3s;
+    transition: all 2s;
+}
+
+/* Modal Content */
+.alert-container {
+    background-color: #ba7575;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 30%;
+}
+
+.alert-container hr{
+    border: #9c18189e solid 0.5px;
+}
+
+/*.alert {*/
+/*    !*visibility: hidden;*!*/
+/*}*/
+
+/* The Close Button */
+.alert-close-btn {
+    color: #ffffff;
+    float: right;
+    font-size: 18px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: #9c18189e;
+}
+
+.alert-close-btn:hover,
+.alert-close-btn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.alert-title {
+    color: black;
+}
+
+.alert-title h2 {
+    font-size: 16px;
+}
+
+.alert-title h2 {
+    font-size: 12px;
+}
+
+.alert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
